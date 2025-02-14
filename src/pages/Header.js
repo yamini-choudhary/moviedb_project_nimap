@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const [search, setSearch] = useState("");
+  const navigate = useNavigate(); // Hook to navigate programmatically
+
   const handleInputChange = (e) => {
     setSearch(e.target.value);
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      navigate(`/search?query=${search.trim()}`); // Redirect with query parameter
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -18,34 +24,24 @@ function Header() {
           <div className="nav-items">
             <ul className="nav-items">
               <li className="items">
-                <Link to="/" className="items">
-                  Popular
-                </Link>
+                <Link to="/" className="items">Popular</Link>
               </li>
               <li className="items">
-                <Link to="/top-rated" className="items">
-                  Top Rated
-                </Link>
+                <Link to="/top-rated" className="items">Top Rated</Link>
               </li>
               <li className="items">
-                <Link to="/upcoming" className="items">
-                  Upcoming
-                </Link>
+                <Link to="/upcoming" className="items">Upcoming</Link>
               </li>
             </ul>
-            <form className="example">
+            <form className="example" onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Movie Name"
-                name="search"
                 className="input-field"
                 value={search}
                 onChange={handleInputChange}
               />
-              <button type="submit" className="search-button">
-                Search
-              </button>
-             
+              <button type="submit" className="search-button">Search</button>
             </form>
           </div>
         </div>

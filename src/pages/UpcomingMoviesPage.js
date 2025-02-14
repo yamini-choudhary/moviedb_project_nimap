@@ -5,43 +5,57 @@ import Card from "../pages/Card";
 
 const UpcomingMoviesPage = () => {
   const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    getAllData();
-  }, []);
+    getAllData(currentPage);
+  }, [currentPage]); 
 
-  useEffect(() => {
-    if (data && searchQuery.trim() !== "") {
-      const filtered = data.filter((item) =>
-        item.original_title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredData(filtered);
-    } else {
-      setFilteredData(data);
+  async function getAllData(page) {
+    try {
+      const apiData = await fetch(`${UPCOMING_MOVIES}&page=${page}`);
+      const res = await apiData.json();
+      setData(res.results);
+      setTotalPages(res.total_pages);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
-  }, [data, searchQuery]);
-
-  async function getAllData() {
-    const apiData = await fetch(UPCOMING_MOVIES);
-    const res = await apiData.json();
-    console.log(res.results);
-    setData(res.results);
-    setFilteredData(res.results);
   }
 
-  const handleSearch = (query) => {
-    setSearchQuery(query);
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
   };
 
   return (
     <>
-      <Header onSearch={handleSearch} />
+      <Header />
       <div className="cards-container">
-        {filteredData?.map((item) => (
-          <Card {...item} key={item.id} />
-        ))}
+        {data.length > 0 ? (
+          data.map((item) => <Card {...item} key={item.id} />)
+        ) : (
+          <p>No upcoming movies found</p>
+        )}
+      </div>
+
+      <div className="pagination">
+        <button onClick={prevPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button onClick={nextPage} disabled={currentPage === totalPages}>
+          Next
+        </button>
       </div>
     </>
   );
