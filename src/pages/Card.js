@@ -15,7 +15,8 @@ const Card = ({
       <div className="cards">
         <img src={IMAGE_URL + poster_path} alt="im" className="images" />
         <p className="title">{original_title}</p>
-        <p className="rating">Rating : {vote_average.toFixed(1)}</p>
+        <p className="rating">Rating : {vote_average ? vote_average.toFixed(1) : "N/A"}</p>
+        {/* <p className="rating">Rating : {(vote_average || 0).toFixed(1)}</p> */}
       </div>
     </Link>
   );

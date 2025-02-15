@@ -17,6 +17,7 @@ const HomePage = () => {
       const apiData = await fetch(`${URL}&page=${page}`);
       const res = await apiData.json();
       setData(res.results);
+      console.log(res.results)
       setTotalPages(res.total_pages);
     } catch (error) {
       console.error("Error fetching data:", error);
