@@ -265,9 +265,15 @@ body {
     padding: 0px;
     gap: 0px;
   }
+ 
 }
 
 @media (max-width: 480px) {
+  .actor-image {
+    width: 180px;
+    height: auto;
+    border-radius: var(--border-radius);
+  }
   .navbar {
     padding: 10px;
   }
