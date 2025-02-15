@@ -14,11 +14,11 @@ const SearchPage = () => {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false); // ✅ Added loading state
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (query) {
-      setCurrentPage(1); // ✅ Reset to first page when a new search happens
+      setCurrentPage(1);
       fetchMovies(query, 1);
     }
   }, [query]);
@@ -30,7 +30,7 @@ const SearchPage = () => {
   }, [currentPage]);
 
   const fetchMovies = async (query, page) => {
-    setLoading(true); // ✅ Start loading
+    setLoading(true);
     try {
       const response = await fetch(`${SEARCH_URL}&query=${query}&page=${page}`);
       const result = await response.json();
@@ -38,9 +38,9 @@ const SearchPage = () => {
       setTotalPages(result.total_pages || 1);
     } catch (error) {
       console.error("Error fetching search results:", error);
-      setMovies([]); // Handle errors by clearing movies
+      setMovies([]);
     }
-    setLoading(false); // ✅ Stop loading
+    setLoading(false);
   };
 
   const nextPage = () => {
@@ -56,11 +56,11 @@ const SearchPage = () => {
       <Header />
       <div className="cards-container">
         {loading ? (
-          <p>Loading...</p> // ✅ Show while fetching data
+          <p>Loading...</p>
         ) : movies.length > 0 ? (
           movies.map((movie) => <Card {...movie} key={movie.id} />)
         ) : (
-          <p>No movies found for "{query}"</p> // ✅ Show only when API call is complete & no results
+          <p>No movies found for "{query}"</p>
         )}
       </div>
 

@@ -11,7 +11,6 @@ const Card = ({
   return (
     <Link to={`/movie/${id}`} className="items">
       {" "}
-      {/* Link to the movie details page */}
       <div className="cards">
         <img src={IMAGE_URL + poster_path} alt="im" className="images" />
         <p className="title">{original_title}</p>
