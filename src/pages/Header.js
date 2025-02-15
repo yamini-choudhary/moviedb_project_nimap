@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const [search, setSearch] = useState("");
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const navigate = useNavigate(); 
 
   const handleInputChange = (e) => {
     setSearch(e.target.value);
@@ -12,7 +12,7 @@ function Header() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (search.trim()) {
-      navigate(`/search?query=${search.trim()}`); // Redirect with query parameter
+      navigate(`/search?query=${search.trim()}`); 
     }
   };
 
