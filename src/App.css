@@ -222,7 +222,6 @@ body {
   max-width: 150px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -265,7 +264,13 @@ body {
     padding: 0px;
     gap: 0px;
   }
- 
+  .cast-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media (max-width: 480px) {
@@ -330,12 +335,4 @@ body {
   font-size: 16px;
 }
 
-@media (max-width: 768px) {
-  .cast-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-  }
-}
+

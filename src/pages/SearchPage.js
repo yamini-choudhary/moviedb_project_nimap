@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import Header from "./Header";
 import Card from "./Card";
+import Pagination from "./Pagination";
 
 const API_KEY = "c45a857c193f6302f2b5061c3b85e743";
 const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US`;
@@ -43,17 +43,8 @@ const SearchPage = () => {
     setLoading(false);
   };
 
-  const nextPage = () => {
-    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
-  };
-
-  const prevPage = () => {
-    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
-  };
-
   return (
     <>
-      <Header />
       <div className="cards-container">
         {loading ? (
           <p>Loading...</p>
@@ -65,17 +56,11 @@ const SearchPage = () => {
       </div>
 
       {movies.length > 0 && !loading && (
-        <div className="pagination">
-          <button onClick={prevPage} disabled={currentPage === 1}>
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button onClick={nextPage} disabled={currentPage === totalPages}>
-            Next
-          </button>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       )}
     </>
   );

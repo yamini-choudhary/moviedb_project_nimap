@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Header from "./Header";
 
 const API_KEY = "c45a857c193f6302f2b5061c3b85e743";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -66,7 +65,6 @@ const SingleMoviePage = () => {
 
   return (
     <>
-      <Header />
       <div className="details-cast-section">
         <div className="details-section">
           <div className="details">
@@ -78,7 +76,9 @@ const SingleMoviePage = () => {
               />
               <div className="bg-items">
                 <h3 className="details-title">{original_title}</h3>
-                <p className="details-rating">Rating : {vote_average.toFixed(1)}</p>
+                <p className="details-rating">
+                  Rating : {vote_average.toFixed(1)}
+                </p>
                 <h3 className="genres">
                   Genres :{" "}
                   {genres?.map((genre) => genre.name).join(", ") || "N/A"}
@@ -110,7 +110,7 @@ const SingleMoviePage = () => {
           <ul className="cast-list">
             {cast.length > 0 ? (
               cast
-                .filter((actor) => actor.profile_path) 
+                .filter((actor) => actor.profile_path)
                 .map((actor) => (
                   <li key={actor.id} className="cast-item">
                     <img

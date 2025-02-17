@@ -24,13 +24,19 @@ function Header() {
           <div className="nav-items">
             <ul className="nav-items">
               <li className="items">
-                <Link to="/" className="items">Popular</Link>
+                <Link to="/" className="items">
+                  Popular
+                </Link>
               </li>
               <li className="items">
-                <Link to="/top-rated" className="items">Top Rated</Link>
+                <Link to="/top-rated" className="items">
+                  Top Rated
+                </Link>
               </li>
               <li className="items">
-                <Link to="/upcoming" className="items">Upcoming</Link>
+                <Link to="/upcoming" className="items">
+                  Upcoming
+                </Link>
               </li>
             </ul>
             <form className="example" onSubmit={handleSubmit}>
@@ -41,7 +47,9 @@ function Header() {
                 value={search}
                 onChange={handleInputChange}
               />
-              <button type="submit" className="search-button">Search</button>
+              <button type="submit" className="search-button">
+                Search
+              </button>
             </form>
           </div>
         </div>

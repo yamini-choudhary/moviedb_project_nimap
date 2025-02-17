@@ -5,10 +5,12 @@ import SingleMoviePage from "./pages/SingleMoviePage";
 import SearchPage from "./pages/SearchPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Header from "./pages/Header";
 
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/top-rated" element={<TopRatedPage />} />
